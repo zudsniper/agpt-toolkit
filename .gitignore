@@ -1,0 +1,11 @@
+# build files
+**/build/
+**/node_modules/
+
+# environment files
+**.env*
+!**.env.template
+
+**/ecosystem.config.*
+!**/ecosystem.template.*
+
