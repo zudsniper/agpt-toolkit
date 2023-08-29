@@ -1,8 +1,7 @@
 #!/bin/bash
-# init_agpt.sh
+# init_agpt.sh v5.3.0
 # ------------
 #
-# 5.2.1
 # This script will initialize the redis server for AutoGPT
 #      then start the AutoGPT instance of name $1
 # ---------------------------------------------------------
@@ -13,6 +12,8 @@
 # Modified by ChatGPT
 
 
+# last autogpt version with redis memory support
+export AGPT_VERSION="0.3.1"
 
 #############################################
 #                CLI COLORS 
@@ -55,7 +56,7 @@ log() {
 print_help() {
   echo -e "${A_BOLD}${A_UNDERLINE}Usage:${A_RESET}"
   echo -e "  ${A_BOLD}./init_agpt.sh${A_RESET} [options]"
-  echo -e "  ${A_BOLD}./pause.sh${A_RESET} [options]\n"
+  #echo -e "  ${A_BOLD}./pause.sh${A_RESET} [options]\n"
   echo -e "${A_BOLD}${A_UNDERLINE}Options:${A_RESET}"
   echo -e "  -h, --help                          Display this help message"
   echo -e "  -b, --agpt-branch <branch_name>     Use the specified branch_name for the Auto-GPT repository"
@@ -434,10 +435,10 @@ DOCKERFILE_CONTENT=$(cat <<'EOF'
 # Base image
 #FROM significantgravitas/auto-gpt:0.2.2
 
-#hopefully this is 0.3.0
-FROM significantgravitas/auto-gpt:latest
+# Base image (last version with redis)
+FROM significantgravitas/auto-gpt:0.3.1
 
-# currently unsupported...
+# TODO: currently unsupported...
 # Add pause.sh script
 #COPY pause.sh /usr/local/bin/pause.sh
 #RUN chmod +x /usr/local/bin/pause.sh
